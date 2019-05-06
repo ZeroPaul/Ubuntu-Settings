@@ -1,0 +1,96 @@
+# Some comands  {{{
+
+# type: comands type
+# which: ubication directorie
+# cal: calendar printed
+# whatis: comands description
+# file: type text in file
+# passwd: change your password
+#
+
+#Processes
+# ps: Report a snapshot of current processes.
+# top: Display tasks.
+# jobs: List active jobs.z bg— Place a job in the background.
+# fg: Place a job in the foreground.
+# kill: Send a signal to a process.
+# killall: Kill processes by name.
+# shutdown: Shut down or reboot the system.
+
+#Environment
+# printenv: Print part or all of the environment.
+# set: Set shell options.
+# export: Export environment to subsequently executed programs.
+# alias: Create an alias for a command.
+
+#Storge
+# mount: Mount a filesystem.
+# umount: Unmount a filesystem.z fdisk —Partition table manipulator.
+# fsck: Check and repair a filesystem.
+# fdformat: Format a floppy disk.
+# mkfs: Create a filesystem.
+# dd: Write block-oriented data directly to a device.
+# genisoimage (mkisofs): Create an ISO 9660 image file.
+# wodim (cdrecord): Write data to optical storage media.
+# md5sum: Calculate an MD5 checksum.
+
+#Networking
+# ping: Send an ICMP ECHO_REQUEST to network hosts.
+# traceroute: Print the route packets trace to a network host.
+# netstat: Print network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
+# ftp: Internet file transfer program.z lftp —An improved Internet file transfer program.
+# wget: Non-interactive network downloader.
+# ssh: OpenSSH SSH client (remote login program).
+# scp: Secure copy (remote file copy program).
+# sftp: Secure file transfer program.
+
+#Searching Files
+# locate: Find files by name.
+# find: Search for files in a directory hierarchy.
+# xargs: Build and execute command lines from standard input.
+# touch: Change file times.
+# stat: Display file or filesystem status.
+
+#Backup
+# gzip: Compress or expand files.
+# bzip2: A block sorting file compressor.
+# tar: Tape-archiving utility.
+# zip: Package and compress files.
+# rsync: Remote file and directory synchronization.
+
+#Text Processing
+# cat: Concatenate files and print on the standard output.
+# sort: Sort lines of text files.
+# uniq: Report or omit repeated lines.
+# cut: Remove sections from each line of files.
+# paste: Merge lines of files.
+# join: Join lines of two files on a common field.
+# comm: Compare two sorted files line by line.z diff —Compare files line by line.
+# patch: Apply a diff file to an original.
+# tr: Translate or delete characters.
+# sed: Stream editor for filtering and transforming text.
+# aspell: Interactive spell checker.
+
+#Formatting Output
+# nl: Number lines.
+# fold: Wrap each line to a specified length.
+# fmt: A simple text formatter.
+# pr: Format text for printing.
+# printf: Format and print data.
+# groff: A document formatting system.
+
+#Printing
+# pr: Convert text files for printing.
+# lpr: Print files.
+# lp: Print files (System V).
+# a2ps: Format files for printing on a PostScript printer.
+# lpstat: Show printer status information.
+# lpq: Show printer queue status.
+# lprm: Cancel print jobs.
+# cancel: Cancel print jobs (System V).
+
+#Compiling Programs
+# make: Utility to maintain programs.
+
+# }}}
+

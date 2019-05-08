@@ -62,6 +62,11 @@ echo "Install ZSH"
 echo "Install Pip"
 #sudo apt-get install -y python-pip
 
+echo "Install Python Prerequisites"
+# sudo apt install zlib1g-dev
+# sudo apt-get install libffi-dev
+
+
 echo "Install VirtualenvWrapper"
 #pip install --user virtualenvwrapper
 

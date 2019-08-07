@@ -88,6 +88,9 @@ echo "Install Tmux"
 echo "Install Tree"
 # sudo apt-get install -y tree
 
+echo "Install Sqliteman"
+# sudo apt-get install sqliteman
+
 echo "Install Checkinstall"
 # sudo apt-get install checkinstall
 

@@ -101,6 +101,9 @@ echo "Install Tmux"
 echo "Install Tree"
 # sudo apt-get install -y tree
 
+echo "Isntall Samba"
+# sudo apt install samba
+
 echo "Install Sqliteman"
 # sudo apt-get install sqliteman
 
@@ -142,10 +145,6 @@ echo "Install Bundle"
 # git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo "Install SimpleRecoder"
-sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
-sudo apt-get update
-sudo apt-get install simplescreenrecorder
-
-echo "Isntall Translate"
-sudo apt install translate-shell
-
+# sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+# sudo apt-get update
+# sudo apt-get install simplescreenrecorder

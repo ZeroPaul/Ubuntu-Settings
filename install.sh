@@ -39,14 +39,27 @@ echo "Install Chrome"
 #sudo dpkg -i google-chrome-stable_current_amd64.deb
 #sudo apt-get install -f
 
+echo "Install Brave"
+# sudo apt install apt-transport-https curl
+
+# curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+
+# source /etc/os-release
+
+# echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
+
+# sudo apt update
+
+# sudo apt install brave-browser
+
 echo "Install Rar"
 #sudo apt-get install unrar
 
 echo "Install Mocp"
 #sudo apt-get install -y moc
-#cd $HOME/.moc && touch config.txt
-#echo "Theme = darkdot_theme" >> config.txt
-#sudo chmod 755 config.txt && cd $HOME
+#cd $HOME/.moc && touch config
+#echo "Theme = darkdot_theme" >> config
+#sudo chmod 756 config && cd $HOME
 
 echo "Install Pavucontrol"
 #sudo apt-get install -y pavucontrol
@@ -127,4 +140,12 @@ echo "Install Vim"
 echo "Install Bundle"
 # mkdir -p .vim/bundle && cd .vim/bundle #don't
 # git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+echo "Install SimpleRecoder"
+sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+sudo apt-get update
+sudo apt-get install simplescreenrecorder
+
+echo "Isntall Translate"
+sudo apt install translate-shell
 

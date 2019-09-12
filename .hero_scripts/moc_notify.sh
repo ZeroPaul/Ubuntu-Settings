@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
-export LANG=en_US.UTF-8
 
 NOW_MUSIC=$(lsof -F -c mocp | grep /Mú)
 DIRECTORY_MUSIC=$HOME/Música/
 FILE_MUSIC=$(basename -- "$NOW_MUSIC")
 FILE_NAME=${FILE_MUSIC%.*}
-IMAGE_NAME=$FILE_NAME".jpg"
+
+MOC_SONG=$(mocp -Q %song)
+MOC_ARTIST=$(mocp -Q %artist)
+MOC_ALBUM=$(mocp -Q %album)
+
+BASE_64=$(echo "$MOC_ARTIST$MOC_ALBUM" | base64)
+
+IMAGE_NAME=$BASE_64".jpg"
 ART="$HOME/.art/""$IMAGE_NAME"
 SERVICE="mocp"
 
@@ -20,22 +26,13 @@ then
         echo "$IMAGE_NAME does not exist"
     fi
     
-    MOC_SONG=$(mocp -Q %song)
-    MOC_ARTIST=$(mocp -Q %artist)
-    MOC_ALBUM=$(mocp -Q %album)
-
     DESCRIPTION="Artist  > $MOC_ARTIST ""\\r""Album > $MOC_ALBUM"
     notify-send -i "$ART" "$MOC_SONG" "$DESCRIPTION"
     echo $ART
 
 else
     echo "$SERVICE stopped"
-    # uncomment to start nginx if stopped
-    # systemctl start nginx
-    # mail
 fi
-
-
 
 
 

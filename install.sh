@@ -59,6 +59,7 @@ echo "Install Mocp"
 #sudo apt-get install -y moc
 #cd $HOME/.moc && touch config
 #echo "Theme = darkdot_theme" >> config
+# echo "OnSongChange="/home/zero/.moc/moc_notify.sh"" >> config
 #sudo chmod 756 config && cd $HOME
 
 echo "Install Pavucontrol"
@@ -148,3 +149,16 @@ echo "Install SimpleRecoder"
 # sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
 # sudo apt-get update
 # sudo apt-get install simplescreenrecorder
+
+echo "Install Xcursor"
+# sudo apt-get install xcursor-themes lxappearance
+
+echo "Install Imaging"
+# sudo apt-get install imagemagick
+# sudo apt-get install python-imaging
+
+echo "Install Conky"
+# sudo apt install conky-all
+
+echo "Install Ffmpeg"
+# sudo apt-get install ffmpeg

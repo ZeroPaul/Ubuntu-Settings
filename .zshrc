@@ -81,7 +81,7 @@ ZSH_THEME="zePool"
 
 # Plugins {{{
 
-plugins=(git)
+plugins=(git virtualenvwrapper)
 
 # }}}
 
@@ -159,7 +159,7 @@ function __mkdir {
             text="$d directory already exists"
         else
             text="$d directory has been created"
-            sudo mkdir -p $d
+            mkdir -p $d
         fi
         message+=$text
         message+="\\r"
@@ -167,7 +167,7 @@ function __mkdir {
     __notify folder-new "Launcher" "${message:0:-2}"
     clear
 }
-
+#add R not R destroid
 function __destroid {
     message=""
     for arg in $@; do
@@ -229,6 +229,27 @@ function __openx {
     fi
 }
 
+function __backup {
+    dir_backup=$HOME/.backup
+    if [[ -d "$dir_backup" ]]; then
+        echo "exists"
+    else
+        cd && mkdir .backup
+    fi
+
+    for back in $@; do
+        if [[ -f $back || -d $back ]]; then
+            echo "work"
+            # path_base64=$(dirname "$back")
+            path_base64=$(readlink -f "$back")
+            backup_base64=$(echo "$back" | base64)
+            echo $backup_base64
+            echo $path_base64
+        else
+            echo "no found"
+        fi
+    done
+} 
 # }}}
 
 # Aliases  {{{
@@ -260,10 +281,10 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
 export VIRTUALENV_DISTRIBUTE=true
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
-# export VIRTUALENVWRAPPER_SCRIPT=$HOME/.local/bin/virtualenvwrapper.sh
-source $HOME/.local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper_lazy.sh
 
-#ZA }}}
+#}}}
 
 # OpenSSL {{{
 
@@ -277,4 +298,6 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 # }}}
+
+# LS_COLORS="ow=1;32"
 

@@ -12,7 +12,7 @@
 # Path oh-my-zsh {{{
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/zero/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # }}}
 
@@ -81,7 +81,7 @@ ZSH_THEME="zePool"
 
 # Plugins {{{
 
-plugins=(git virtualenvwrapper)
+plugins=(git)
 
 # }}}
 
@@ -126,9 +126,9 @@ export TERM=xterm-256color
 
 # Tmux {{{
 
-if [[ $SHLVL != "2" ]]; then
-tmux;
-fi
+#if [[ $SHLVL != "2" ]]; then
+#tmux;
+#fi
 
 # }}}
 
@@ -240,11 +240,16 @@ function __backup {
     for back in $@; do
         if [[ -f $back || -d $back ]]; then
             echo "work"
-            # path_base64=$(dirname "$back")
-            path_base64=$(readlink -f "$back")
+            path_orgin=$(readlink -f "$back")
+            path_dir=$(dirname "$path_orgin")
+            path_backup=$HOME/.backup
+            extension_file="${back##*.}"
+            cd $path_dir && cp $back $path_backup/
             backup_base64=$(echo "$back" | base64)
             echo $backup_base64
-            echo $path_base64
+            echo $path_orgin
+            echo $path_dir
+            echo $extension_file
         else
             echo "no found"
         fi
@@ -277,25 +282,25 @@ alias cursoredit="sudo vim /usr/share/icons/default/index.theme"
 
 # VirtualenvWrapper {{{
 
-export WORKON_HOME=$HOME/.virtualenvs 
-export PROJECT_HOME=$HOME/projects
-export VIRTUALENV_DISTRIBUTE=true
-export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
-export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+#export WORKON_HOME=$HOME/.virtualenvs 
+#export PROJECT_HOME=$HOME/projects
+#export VIRTUALENV_DISTRIBUTE=true
+#export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
+#export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper_lazy.sh
 
-#}}}
+# }}}
 
 # OpenSSL {{{
 
-export PATH="/usr/local/ssl/bin:${PATH}"
+#export PATH="/usr/local/ssl/bin:${PATH}"
 
 # }}}
 
 # Variables  {{{
 
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
+#export LC_ALL="en_US.UTF-8"
+#export LC_CTYPE="en_US.UTF-8"
 
 # }}}
 

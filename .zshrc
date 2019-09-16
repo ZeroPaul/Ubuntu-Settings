@@ -9,6 +9,12 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Mode {{{
+
+ZSH_MODE="$(uname -o)"
+
+# }}}
+
 # Path oh-my-zsh {{{
 
 # Path to your oh-my-zsh installation.
@@ -167,17 +173,27 @@ function __mkdir {
     __notify folder-new "Launcher" "${message:0:-2}"
     clear
 }
-#add R not R destroid
+
 function __destroid {
     message=""
-    for arg in $@; do
-        __typer $arg
-        message+=$t
-        message+="\\r"
-    done
-    sudo rm -r -f $*
-    __notify edittrash "Destroid" "${message:0:-2}"
-    clear
+    if [[ "$ZSH_MODE" == "Android" ]]; then
+        jumper="\n"
+        for arg in $@; do
+            __typer $arg
+            message=$message$t$jumper
+        done
+        rm -r -f $*
+        echo "${message:0:-2}"
+    elif [[ "$ZSH_MODE" == "GNU/Linux" ]]; then
+        for arg in $@; do
+            __typer $arg
+            message+=$t
+            message+="\\r"
+        done;
+        sudo rm -r -f $*
+        __notify edittrash "Destroid" "${message:0:-2}"
+    fi
+    #clear
 }
 
 function __fixer {
@@ -254,7 +270,24 @@ function __backup {
             echo "no found"
         fi
     done
-} 
+}
+
+function __modex {
+    if [[ "$ZSH_MODE" == "Android" ]]; then
+        echo "mode movil"
+    elif [[ "$ZSH_MODE" == "GNU/Linux" ]]; then
+        echo "mode desktop"
+    fi
+}
+
+function __fuel {
+    msg=""
+    jumper="\n"
+    for i in $@; do
+        msg=$vf$i$jumper
+    done
+    echo "$msg"
+}
 # }}}
 
 # Aliases  {{{
@@ -268,7 +301,6 @@ alias fontsadd="__fontadd"
 alias fontsconf="__confont"
 alias cursoradd="__cursoradd"
 alias openx="__openx 2>/dev/null"
-
 
 alias zetting="vim ~/.zshrc"
 alias zource="source ~/.zshrc"

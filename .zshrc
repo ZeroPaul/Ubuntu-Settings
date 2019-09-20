@@ -6,8 +6,6 @@
 #
 #   Author: ZeroPaul <landerspaulzero@gmail.com>
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Mode {{{
 
@@ -17,8 +15,11 @@ ZSH_MODE="$(uname -o)"
 
 # Path oh-my-zsh {{{
 
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="/home/zero/.oh-my-zsh"
 
 # }}}
 
@@ -87,7 +88,7 @@ ZSH_THEME="zePool"
 
 # Plugins {{{
 
-plugins=(git)
+plugins=(git virtualenvwrapper)
 
 # }}}
 
@@ -133,7 +134,7 @@ export TERM=xterm-256color
 # Tmux {{{
 
 if [[ $SHLVL != "2" ]]; then
-    tmux;
+tmux;
 fi
 
 # }}}
@@ -165,13 +166,13 @@ function __mkdir {
             text="$d directory already exists"
         else
             text="$d directory has been created"
-            mkdir -p $d
+            sudo mkdir -p $d
         fi
         message+=$text
         message+="\\r"
     done
     __notify folder-new "Launcher" "${message:0:-2}"
-    clear
+    # clear
 }
 
 function __destroid {
@@ -193,7 +194,7 @@ function __destroid {
         sudo rm -r -f $*
         __notify edittrash "Destroid" "${message:0:-2}"
     fi
-    #clear
+    # clear
 }
 
 function __fixer {
@@ -263,13 +264,10 @@ function __backup {
                 base_name=$(dirname "$orgin_path")
                 base_name=$(echo "$base_name" | base64)
             fi
-            
-            #decode_name=$(echo "$base_name" | base64 -d)
-            #extension_file="${fd##*.}"
             cp -r $fd $base_name && mv $base_name $dir_backup
             echo "Backup created from $fd"            
         else
-            echo "no found"
+            echo "no found $fd"
         fi
     done
 
@@ -324,74 +322,78 @@ function __modex {
     fi
 }
 
-function __rename {
-    echo "$1"
-    echo "$2"
-
-
-
-    if [[ -f  "$1" || -d "$1" ]]; then
-        echo "is file or directory"
-    else
-        echo "no found"
-    fi
-
+function __matrix {
+    timeout $1 cmatrix -u $2 -C blue
+    echo ""
 }
-
 
 
 # }}}
 
 # Aliases  {{{
 
+#Universal
+
 alias launcher='__mkdir'
 alias destroid='__destroid'
-alias fixdisc="__fixer"
-alias mimefind="__mimefind"
-alias mimeadd="__mimeadd"
-alias fontsadd="__fontadd"
-alias fontsconf="__confont"
-alias cursoradd="__cursoradd"
-alias openx="__openx 2>/dev/null"
 alias backup="__backup"
+alias recover="__recover"
 
-
-alias zetting="vim ~/.zshrc"
-alias zource="source ~/.zshrc"
+alias zource="source ~/.zshrc && __matrix 3 1"
+alias tource="tmux source-file ~/.tmux.conf"
 alias zzh="cat ~/.ssh/id_rsa.pub"
-alias listz="sudo vim /etc/apt/sources.list"
+alias zetting="vim ~/.zshrc"
+alias zvim="vim ~/.vimrc"
 
-alias cursoredit="sudo vim /usr/share/icons/default/index.theme"
+#Mode
+if [[ "$ZSH_MODE" == "Android" ]]; then
+    alias tester="ls"
+elif [[ "$ZSH_MODE" == "GNU/Linux" ]]; then
+    alias fixdisc="__fixer"
+    alias mimefind="__mimefind"
+    alias mimeadd="__mimeadd"   
+    alias openx="__openx 2>/dev/null"
+    alias cursoradd="__cursoradd"
 
-# /usr/share/thumbnailers
+    alias listz="sudo vim /etc/apt/sources.list"
+    alias cursoredit="sudo vim /usr/share/icons/default/index.theme"
+    alias fontsadd="__fontadd"
+    alias fontsconf="__confont"
+fi 
+ 
 #}}}
 
 # VirtualenvWrapper {{{
 
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENV_DISTRIBUTE=true
+
 if [[ "$ZSH_MODE" == "Android" ]]; then
-    echo "mode movil"
-    export WORKON_HOME=$HOME/.virtualenvs 
     export PROJECT_HOME=$HOME/Projects
-    export VIRTUALENV_DISTRIBUTE=true      
     export VIRTUALENVWRAPPER_SCRIPT=$HOME/../usr/bin/virtualenvwrapper.sh
     source $HOME/../usr/bin/virtualenvwrapper_lazy.sh
 elif [[ "$ZSH_MODE" == "GNU/Linux" ]]; then
-    echo "mode desktop"
+    export PROJECT_HOME=$HOME/projects
+    export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+    source /usr/local/bin/virtualenvwrapper_lazy.sh
 fi
-#export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 
-# }}}
+#}}}
 
 # OpenSSL {{{
 
-#export PATH="/usr/local/ssl/bin:${PATH}"
+if [[ "$ZSH_MODE" == "Android" ]]; then
+    :
+elif [[ "$ZSH_MODE" == "GNU/Linux" ]]; then
+    export PATH="/usr/local/ssl/bin:${PATH}"
+fi
 
 # }}}
 
 # Variables  {{{
 
-#export LC_ALL="en_US.UTF-8"
-#export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 
 # }}}
 

@@ -132,9 +132,9 @@ export TERM=xterm-256color
 
 # Tmux {{{
 
-#if [[ $SHLVL != "2" ]]; then
-#tmux;
-#fi
+if [[ $SHLVL != "2" ]]; then
+    tmux;
+fi
 
 # }}}
 
@@ -247,27 +247,71 @@ function __openx {
 
 function __backup {
     dir_backup=$HOME/.backup
+    
     if [[ -d "$dir_backup" ]]; then
         echo "exists"
     else
         cd && mkdir .backup
     fi
-
-    for back in $@; do
-        if [[ -f $back || -d $back ]]; then
-            echo "work"
-            path_orgin=$(readlink -f "$back")
-            path_dir=$(dirname "$path_orgin")
-            path_backup=$HOME/.backup
-            extension_file="${back##*.}"
-            cd $path_dir && cp $back $path_backup/
-            backup_base64=$(echo "$back" | base64)
-            echo $backup_base64
-            echo $path_orgin
-            echo $path_dir
-            echo $extension_file
+    
+    for fd in $@; do
+        if [[ -f $fd || -d $fd ]]; then
+            orgin_path=$(readlink -f "$fd")
+            if [[ -f $fd ]]; then
+                base_name=$(echo "$orgin_path" | base64)
+            elif [[ -d $fd ]]; then
+                base_name=$(dirname "$orgin_path")
+                base_name=$(echo "$base_name" | base64)
+            fi
+            
+            #decode_name=$(echo "$base_name" | base64 -d)
+            #extension_file="${fd##*.}"
+            cp -r $fd $base_name && mv $base_name $dir_backup
+            echo "Backup created from $fd"            
         else
             echo "no found"
+        fi
+    done
+
+}
+
+function __recover {
+    path_backup=$HOME/.backup/
+    for filer in $@; do
+        if [[ -f "$filer" || -d "$filer" ]]; then
+            orgin_path=$(readlink -f "$filer")
+            if [[ -f $filer ]]; then
+                base_name=$(echo "$orgin_path" | base64)
+            elif [[ -d $filer ]]; then
+                base_name=$(dirname "$orgin_path")
+                base_name=$(echo "$base_name" | base64)
+            fi
+            
+            dir_path=$(dirname "$orgin_path")
+            name_backup="${filer%.*}"
+            
+            if [[ -f "$path_backup$base_name" ]]; then
+                echo "exists"
+                extension_file="${filer##*.}"
+                back_file=$name_backup"-backup."
+                cd "$path_backup"
+                cp "$base_name" "$back_file$extension_file"
+                mv "$back_file$extension_file" $dir_path
+                cd "$dir_path"
+                echo "recovered file $filer"
+            elif [[ -d "$path_backup$base_name" ]]; then
+                echo "exists directory"
+                back_file=$name_backup"-backup"
+                cd "$path_backup"
+                cp -r "$base_name" "$back_file"
+                mv "$back_file" $dir_path
+                cd "$dir_path"
+                
+            else
+                echo "no backup"
+            fi
+        else
+            echo "No found $filer"
         fi
     done
 }
@@ -280,14 +324,22 @@ function __modex {
     fi
 }
 
-function __fuel {
-    msg=""
-    jumper="\n"
-    for i in $@; do
-        msg=$vf$i$jumper
-    done
-    echo "$msg"
+function __rename {
+    echo "$1"
+    echo "$2"
+
+
+
+    if [[ -f  "$1" || -d "$1" ]]; then
+        echo "is file or directory"
+    else
+        echo "no found"
+    fi
+
 }
+
+
+
 # }}}
 
 # Aliases  {{{
@@ -301,6 +353,8 @@ alias fontsadd="__fontadd"
 alias fontsconf="__confont"
 alias cursoradd="__cursoradd"
 alias openx="__openx 2>/dev/null"
+alias backup="__backup"
+
 
 alias zetting="vim ~/.zshrc"
 alias zource="source ~/.zshrc"
@@ -314,12 +368,17 @@ alias cursoredit="sudo vim /usr/share/icons/default/index.theme"
 
 # VirtualenvWrapper {{{
 
-#export WORKON_HOME=$HOME/.virtualenvs 
-#export PROJECT_HOME=$HOME/projects
-#export VIRTUALENV_DISTRIBUTE=true
+if [[ "$ZSH_MODE" == "Android" ]]; then
+    echo "mode movil"
+    export WORKON_HOME=$HOME/.virtualenvs 
+    export PROJECT_HOME=$HOME/Projects
+    export VIRTUALENV_DISTRIBUTE=true      
+    export VIRTUALENVWRAPPER_SCRIPT=$HOME/../usr/bin/virtualenvwrapper.sh
+    source $HOME/../usr/bin/virtualenvwrapper_lazy.sh
+elif [[ "$ZSH_MODE" == "GNU/Linux" ]]; then
+    echo "mode desktop"
+fi
 #export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
-#export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-#source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 # }}}
 
@@ -335,6 +394,4 @@ alias cursoredit="sudo vim /usr/share/icons/default/index.theme"
 #export LC_CTYPE="en_US.UTF-8"
 
 # }}}
-
-# LS_COLORS="ow=1;32"
 

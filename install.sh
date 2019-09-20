@@ -162,3 +162,8 @@ echo "Install Conky"
 
 echo "Install Ffmpeg"
 # sudo apt-get install ffmpeg
+
+echo "Install Notify-OSD"
+# sudo add-apt-repository ppa:leolik/leolik
+# sudo apt update
+# sudo apt install notify-osd

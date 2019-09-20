@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info"> 
-    <mime-type type="text/x-vim">
+    <mime-type type="deki">
         <comment>VIM document</comment>
         <acronym>VIM</acronym>
         <sub-class-of type="text/plain"/>
@@ -9,6 +9,5 @@
         <glob pattern="*.vimrc"/>
         <alias type="text/vim"/>
         <alias type="text/x-vim"/>
-        %(fonts)s
     </mime-type>
 </mime-info>

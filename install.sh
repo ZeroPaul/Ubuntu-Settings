@@ -1,6 +1,8 @@
 #!/bin/bash
+figlet="ICBfX19fXyAgICAgICAgICAgXyAgICAgICAgXyBfICAgICAgICAgICAgIF8gICAgXyBfICAgICAgICAgICAgICAgICBfICAgICAgICAgCiB8XyAgIF98ICAgICAgICAgfCB8ICAgICAgfCB8IHwgICAgICAgICAgIHwgfCAgfCB8IHwgICAgICAgICAgICAgICB8IHwgICAgICAgIAogICB8IHwgIF8gX18gIF9fX3wgfF8gX18gX3wgfCB8IF9fXyBfIF9fICB8IHwgIHwgfCB8X18gIF8gICBfIF8gX18gfCB8XyBfICAgXyAKICAgfCB8IHwgJ18gXC8gX198IF9fLyBfYCB8IHwgfC8gXyBcICdfX3wgfCB8ICB8IHwgJ18gXHwgfCB8IHwgJ18gXHwgX198IHwgfCB8CiAgX3wgfF98IHwgfCBcX18gXCB8fCAoX3wgfCB8IHwgIF9fLyB8ICAgIHwgfF9ffCB8IHxfKSB8IHxffCB8IHwgfCB8IHxffCB8X3wgfAogfF9fX19ffF98IHxffF9fXy9cX19cX18sX3xffF98XF9fX3xffCAgICAgXF9fX18vfF8uX18vIFxfXyxffF98IHxffFxfX3xcX18sX3wKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg"
 
-
+echo $figlet | base64 -d
+echo "\n"
 echo "Updating"
 #sudo apt-get update
 
@@ -167,3 +169,11 @@ echo "Install Notify-OSD"
 # sudo add-apt-repository ppa:leolik/leolik
 # sudo apt update
 # sudo apt install notify-osd
+
+echo "Install Nodejs"
+# cd ~
+# curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+# sudo bash nodesource_setup.sh
+# sudo apt-get -y install nodejs
+# rm -r -f nodesource_setup.sh
+
